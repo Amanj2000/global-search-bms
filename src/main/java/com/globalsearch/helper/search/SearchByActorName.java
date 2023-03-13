@@ -5,7 +5,10 @@ import com.globalsearch.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Component
 public class SearchByActorName implements ISearchMovie {
@@ -14,6 +17,9 @@ public class SearchByActorName implements ISearchMovie {
 
 	@Override
 	public List<Movie> search(String partialActorName) {
-		return movieRepository.findByActorsNameContaining(partialActorName);
+		Set<Movie> movies = new HashSet<>();
+		movies.addAll(movieRepository.findByActorsNameContaining(partialActorName));
+		movies.addAll(movieRepository.findByActorsNameFuzzy(partialActorName));
+		return new ArrayList<>(movies);
 	}
 }

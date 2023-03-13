@@ -14,6 +14,6 @@ public class SearchByLanguage implements ISearchMovie {
 
 	@Override
 	public List<Movie> search(String language) {
-		return movieRepository.findByLanguage(language);
+		return movieRepository.findByLanguageFuzzy(language);
 	}
 }

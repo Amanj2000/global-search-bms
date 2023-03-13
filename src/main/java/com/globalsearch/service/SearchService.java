@@ -2,9 +2,6 @@ package com.globalsearch.service;
 
 import com.globalsearch.dto.MovieResponseDTO;
 import com.globalsearch.helper.search.ISearchMovie;
-import com.globalsearch.helper.search.SearchByActorName;
-import com.globalsearch.helper.search.SearchByGenre;
-import com.globalsearch.helper.search.SearchByMovieName;
 import com.globalsearch.model.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -14,6 +14,6 @@ public class SearchByGenre implements ISearchMovie {
 
 	@Override
 	public List<Movie> search(String genre) {
-		return movieRepository.findByGenre(genre);
+		return movieRepository.findByGenreFuzzy(genre);
 	}
 }
