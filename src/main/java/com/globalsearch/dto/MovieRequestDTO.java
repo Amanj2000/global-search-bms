@@ -3,10 +3,13 @@ package com.globalsearch.dto;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
-@Getter
+@Getter @Setter
+@NoArgsConstructor
 @AllArgsConstructor
 public class MovieRequestDTO {
 	@NotNull
@@ -30,4 +33,10 @@ public class MovieRequestDTO {
 
 	@NotEmpty
 	private List<String> cast;
+
+	@Override
+	public String toString() {
+		return String.format("id: %d \t title: %s \t desc: %s \t duration: %d \t language: %s \t genre: %s \t cast: %s\n",
+				id, title, description, duration, language, genre, cast);
+	}
 }
