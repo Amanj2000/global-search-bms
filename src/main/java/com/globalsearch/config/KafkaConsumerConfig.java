@@ -27,7 +27,8 @@ public class KafkaConsumerConfig {
 		Map<String, Object> config = new HashMap<>();
 		config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServer);
 		config.put(ConsumerConfig.CLIENT_ID_CONFIG, "movie-consumer");
-		config.put(ConsumerConfig.GROUP_ID_CONFIG, "globalsearch-movie-consumer-group");
+		config.put(ConsumerConfig.GROUP_ID_CONFIG, "search-movie-consumer-group");
+		config.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 		config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
 		config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, MovieDTODeserializer.class);
 		return new DefaultKafkaConsumerFactory<>(config);

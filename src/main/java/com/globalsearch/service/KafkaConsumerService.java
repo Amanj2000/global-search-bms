@@ -22,7 +22,8 @@ public class KafkaConsumerService {
 	@Autowired
 	private KafkaTemplate<String, List<MovieResponseDTO>> searchResultProducer;
 
-	@KafkaListener(topics = "movies", groupId = "globalsearch-movie-consumer-group", containerFactory = "movieListenerContainerFactory")
+	@KafkaListener(topics = "movies", groupId = "search-movie-consumer-group", containerFactory =
+			"movieListenerContainerFactory")
 	public void listenMovie(@Header(KafkaHeaders.RECEIVED_KEY) String operation, MovieRequestDTO movieRequestDTO) {
 		switch (operation) {
 			case "add" -> movieService.addMovie(movieRequestDTO);
