@@ -23,19 +23,19 @@ public class KafkaConsumerConfig {
 	private String bootstrapServer;
 
 	@Bean
-	public ConsumerFactory<Integer, MovieRequestDTO> movieConsumerFactory() {
+	public ConsumerFactory<String, MovieRequestDTO> movieConsumerFactory() {
 		Map<String, Object> config = new HashMap<>();
 		config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServer);
 		config.put(ConsumerConfig.CLIENT_ID_CONFIG, "movie-consumer");
-		config.put(ConsumerConfig.GROUP_ID_CONFIG, "movie-consumer-group");
-		config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, IntegerDeserializer.class);
+		config.put(ConsumerConfig.GROUP_ID_CONFIG, "globalsearch-movie-consumer-group");
+		config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
 		config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, MovieDTODeserializer.class);
 		return new DefaultKafkaConsumerFactory<>(config);
 	}
 
 	@Bean
-	public ConcurrentKafkaListenerContainerFactory<Integer, MovieRequestDTO> movieListenerContainerFactory() {
-		ConcurrentKafkaListenerContainerFactory<Integer, MovieRequestDTO> factory = new ConcurrentKafkaListenerContainerFactory<>();
+	public ConcurrentKafkaListenerContainerFactory<String, MovieRequestDTO> movieListenerContainerFactory() {
+		ConcurrentKafkaListenerContainerFactory<String, MovieRequestDTO> factory = new ConcurrentKafkaListenerContainerFactory<>();
 		factory.setConsumerFactory(movieConsumerFactory());
 		return factory;
 	}
