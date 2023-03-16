@@ -3,7 +3,6 @@ package com.globalsearch.config;
 import com.globalsearch.dto.MovieRequestDTO;
 import com.globalsearch.dto.deserializer.MovieDTODeserializer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
-import org.apache.kafka.common.serialization.IntegerDeserializer;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -38,24 +37,6 @@ public class KafkaConsumerConfig {
 	public ConcurrentKafkaListenerContainerFactory<String, MovieRequestDTO> movieListenerContainerFactory() {
 		ConcurrentKafkaListenerContainerFactory<String, MovieRequestDTO> factory = new ConcurrentKafkaListenerContainerFactory<>();
 		factory.setConsumerFactory(movieConsumerFactory());
-		return factory;
-	}
-
-	@Bean
-	public ConsumerFactory<String, String> searchConsumerFactory() {
-		Map<String, Object> configs = new HashMap<>();
-		configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServer);
-		configs.put(ConsumerConfig.CLIENT_ID_CONFIG, "search-consumer");
-		configs.put(ConsumerConfig.GROUP_ID_CONFIG, "search-consumer-group");
-		configs.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-		configs.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-		return new DefaultKafkaConsumerFactory<>(configs);
-	}
-
-	@Bean
-	public ConcurrentKafkaListenerContainerFactory<String, String> searchListenerContainerFactory() {
-		ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
-		factory.setConsumerFactory(searchConsumerFactory());
 		return factory;
 	}
 }
